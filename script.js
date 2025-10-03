@@ -39,3 +39,38 @@ function efectoHabilidades(){
 window.onscroll = function(){
     efectoHabilidades();
 } 
+document.getElementById("contact-form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const nombre = this.nombre.value;
+    const telefono = this.telefono.value;
+    const correo = this.correo.value;
+    const tema = this.tema.value;
+    const mensaje = this.mensaje.value;
+
+    const numeroWhatsApp = "573013746805"; // SIN +
+
+    const texto = `Hola, soy ${nombre}%0A
+Teléfono: ${telefono}%0A
+Correo: ${correo}%0A
+Asunto: ${tema}%0A
+Mensaje:%0A${mensaje}`;
+
+    const url = `https://wa.me/${numeroWhatsApp}?text=${texto}`;
+
+    window.open(url, "_blank"); // Abre en una nueva pestaña
+    this.reset(); // Limpia el formulario
+
+    // Mostrar mensaje de confirmación
+    let confirmacion = document.createElement("p");
+    confirmacion.textContent = "✅ Tu mensaje ha sido enviado a WhatsApp. ¡Gracias por contactarme!";
+    confirmacion.style.color = "#4CAF50";
+    confirmacion.style.marginTop = "10px";
+    confirmacion.style.fontWeight = "bold";
+
+    this.appendChild(confirmacion);
+
+    setTimeout(() => {
+        confirmacion.remove();
+    }, 4000);
+});
